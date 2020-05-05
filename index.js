@@ -41,22 +41,30 @@ getToken()
 
 bot.on('message', async (event) => {
   let msg = ''
+  const search = event.message.text
   try {
     // Create an API object with your access token
     const api = new Api(kkboxToken)
 
     // Fetch content with various fetchers
     await api.searchFetcher
-      .setSearchCriteria('五月天 派對動物', 'track')
+      .setSearchCriteria(search, 'track')
       .fetchSearchResult()
       .then(response => {
-        // Content from the KKBOX Open API
-        console.log(response.data)
+        // 搜尋圖片
+        console.log(response.data.tracks.data[0].album.images)
+        msg = response.data.tracks.data[0].album.images
       })
   } catch (error) {
     msg = '發生錯誤'
   }
-  event.reply(msg)
+  for (let i = 0; i < msg.length; i++) {
+    await event.reply({
+      type: 'image',
+      originalContentUrl: msg[i].url,
+      previewImageUrl: msg[i].url
+    })
+  }
 })
 
 // 在 port 啟動
