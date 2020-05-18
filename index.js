@@ -3,6 +3,8 @@ import linebot from 'linebot'
 // 引用 dotenv 套件
 import dotenv from 'dotenv'
 
+import rp from 'request-promise'
+
 // 讀取 env 檔
 dotenv.config()
 
@@ -50,7 +52,7 @@ bot.on('message', async (event) => {
   }
   console.log(msg)
   event.reply(msg)
-
+})
 // 在 port 啟動
 bot.listen('/', process.env.PORT, () => {
   console.log('機器人已啟動')
