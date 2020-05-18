@@ -69,34 +69,6 @@ bot.on('message', async (event) => {
   }
   console.log(msg)
   event.reply(msg)
-=======
-  let msg = ''
-  const search = event.message.text
-  try {
-    // Create an API object with your access token
-    const api = new Api(kkboxToken)
-
-    // Fetch content with various fetchers
-    await api.searchFetcher
-      .setSearchCriteria(search, 'track')
-      .fetchSearchResult()
-      .then(response => {
-        // 搜尋圖片
-        console.log(response.data.tracks.data[0].album.images)
-        msg = response.data.tracks.data[0].album.images
-      })
-  } catch (error) {
-    msg = '發生錯誤'
-  }
-  for (let i = 0; i < msg.length; i++) {
-    await event.reply({
-      type: 'image',
-      originalContentUrl: msg[i].url,
-      previewImageUrl: msg[i].url
-    })
-  }
->>>>>>> master
-})
 
 // 在 port 啟動
 bot.listen('/', process.env.PORT, () => {
