@@ -40,6 +40,36 @@ getToken()
 // })
 
 bot.on('message', async (event) => {
+<<<<<<< HEAD
+  let msg = []
+  try {
+    const data = await rp({ uri: 'https://data.coa.gov.tw/Service/OpenData/ODwsv/ODwsvTravelStay.aspx', json: true })
+    if (event.message.type === 'text') {
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].City.includes(event.message.text)) {
+          // msg.push({ type: 'text', text: data[i].Name })
+          msg.push(
+            { type: 'text', text: data[i].Name },
+            {
+              type: 'image',
+              originalContentUrl: data[i].Photo,
+              previewImageUrl: data[i].Photo
+            })
+          // '\n' + data[i].Address
+          // msg.push({
+          //   type: 'location',
+          //   title: data[i].Name,
+          //   address: data[i].Address
+          // })
+        }
+      }
+    }
+  } catch (error) {
+    msg = '發生錯誤'
+  }
+  console.log(msg)
+  event.reply(msg)
+=======
   let msg = ''
   const search = event.message.text
   try {
@@ -65,6 +95,7 @@ bot.on('message', async (event) => {
       previewImageUrl: msg[i].url
     })
   }
+>>>>>>> master
 })
 
 // 在 port 啟動
