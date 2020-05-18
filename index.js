@@ -3,11 +3,6 @@ import linebot from 'linebot'
 // 引用 dotenv 套件
 import dotenv from 'dotenv'
 
-import kkbox from '@kkbox/kkbox-js-sdk'
-
-const Api = kkbox.Api
-const Auth = kkbox.Auth
-
 // 讀取 env 檔
 dotenv.config()
 
@@ -16,19 +11,6 @@ const bot = linebot({
   channelSecret: process.env.CHANNEL_SECRET,
   channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN
 })
-
-let kkboxToken = ''
-
-const getToken = async () => {
-  const auth = new Auth(process.env.KKBOX_ID, process.env.KKBOX_SECRET)
-  await auth.clientCredentialsFlow
-    .fetchAccessToken()
-    .then(response => {
-      kkboxToken = response.data.access_token
-    })
-}
-
-getToken()
 
 // // 當收到訊息時
 // bot.on('message', function (event) {
@@ -40,7 +22,6 @@ getToken()
 // })
 
 bot.on('message', async (event) => {
-<<<<<<< HEAD
   let msg = []
   try {
     const data = await rp({ uri: 'https://data.coa.gov.tw/Service/OpenData/ODwsv/ODwsvTravelStay.aspx', json: true })
