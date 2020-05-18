@@ -28,30 +28,51 @@ bot.on('message', async (event) => {
   try {
     const data = await rp({ uri: 'https://data.coa.gov.tw/Service/OpenData/ODwsv/ODwsvTravelStay.aspx', json: true })
     if (event.message.type === 'text') {
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].City.includes(event.message.text)) {
-          // msg.push({ type: 'text', text: data[i].Name })
+      for (const i of data) {
+        if (i.City.includes(event.message.text)) {
           msg.push(
-            { type: 'text', text: data[i].Name },
             {
-              type: 'image',
-              originalContentUrl: data[i].Photo,
-              previewImageUrl: data[i].Photo
+              thumbnailImageUrl: i.Photo,
+              title: i.Name,
+              text: i.Address,
+              latitude: 35.65910807942215,
+              longitude: 139.70372892916203,
+              actions: [{
+                type: 'postback',
+                label: 'Buy',
+                data: 'action=buy&itemid=222'
+              }, {
+                type: 'postback',
+                label: 'Add to cart',
+                data: 'action=add&itemid=222'
+              }, {
+                type: 'uri',
+                label: 'View detail',
+                uri: 'http://example.com/page/111'
+              }]
+              // msg.push({
+              //   type: 'location',
+              //   title: data[i].Name,
+              //   address: data[i].Address,
+              //   latitude: 35.65910807942215,
+              //   longitude: 139.70372892916203
+              // })
             })
-          // '\n' + data[i].Address
-          // msg.push({
-          //   type: 'location',
-          //   title: data[i].Name,
-          //   address: data[i].Address
-          // })
         }
       }
     }
   } catch (error) {
     msg = '發生錯誤'
   }
-  console.log(msg)
-  event.reply(msg)
+  console.log(msg[0].actions[2].uri)
+  event.reply({
+    type: 'template',
+    altText: 'this is a carousel template',
+    template: {
+      type: 'carousel',
+      columns: msg
+    }
+  })
 })
 // 在 port 啟動
 bot.listen('/', process.env.PORT, () => {
