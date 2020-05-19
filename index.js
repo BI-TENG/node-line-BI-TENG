@@ -35,29 +35,27 @@ bot.on('message', async (event) => {
               thumbnailImageUrl: i.Photo,
               title: i.Name,
               text: i.Address,
-              latitude: 35.65910807942215,
-              longitude: 139.70372892916203,
               actions: [{
                 type: 'postback',
-                label: 'Buy',
-                data: 'action=buy&itemid=222'
+                label: '地理位置',
+                data: i.Coordinate + ',' + i.Address
               }, {
                 type: 'postback',
                 label: 'Add to cart',
                 data: 'action=add&itemid=222'
               }, {
                 type: 'uri',
-                label: 'View detail',
-                uri: 'http://example.com/page/111'
+                label: '官方網站',
+                uri: 'http://example.com/page/123'
               }]
-              // msg.push({
-              //   type: 'location',
-              //   title: data[i].Name,
-              //   address: data[i].Address,
-              //   latitude: 35.65910807942215,
-              //   longitude: 139.70372892916203
-              // })
             })
+          // msg.push({
+          //   type: 'location',
+          //   title: data[i].Name,
+          //   address: data[i].Address,
+          //   latitude: i.Coordinate.split(',')[0],
+          //   longitude: i.Coordinate.split(',')[1]
+          // })
         }
       }
     }
@@ -72,6 +70,17 @@ bot.on('message', async (event) => {
       type: 'carousel',
       columns: msg
     }
+  })
+})
+
+bot.on('postback', event => {
+  console.log(event.postback.data.split(','))
+  event.reply({
+    type: 'location',
+    title: '旅宿所在位置',
+    address: event.postback.data.split(',')[2],
+    latitude: event.postback.data.split(',')[0],
+    longitude: event.postback.data.split(',')[1]
   })
 })
 // 在 port 啟動
