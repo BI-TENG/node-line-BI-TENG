@@ -77,7 +77,7 @@ bot.on('postback', event => {
   console.log(event.postback.data.split(','))
   event.reply({
     type: 'location',
-    title: '旅宿所在位置',
+    title: '所在位置',
     address: event.postback.data.split(',')[2],
     latitude: event.postback.data.split(',')[0],
     longitude: event.postback.data.split(',')[1]
