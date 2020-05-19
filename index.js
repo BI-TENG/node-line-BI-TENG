@@ -45,17 +45,30 @@ bot.on('message', async (event) => {
                 data: 'action=add&itemid=222'
               }, {
                 type: 'uri',
-                label: '官方網站',
+                label: 'Add to cart',
                 uri: 'http://example.com/page/123'
               }]
             })
-          // msg.push({
-          //   type: 'location',
-          //   title: data[i].Name,
-          //   address: data[i].Address,
-          //   latitude: i.Coordinate.split(',')[0],
-          //   longitude: i.Coordinate.split(',')[1]
-          // })
+        } else if (i.HostWords.includes(event.message.text)) {
+          msg.push(
+            {
+              thumbnailImageUrl: i.Photo,
+              title: i.Name,
+              text: i.Address,
+              actions: [{
+                type: 'postback',
+                label: '地理位置',
+                data: i.Coordinate + ',' + i.Address
+              }, {
+                type: 'postback',
+                label: 'Add to cart',
+                data: 'action=add&itemid=222'
+              }, {
+                type: 'uri',
+                label: 'Add to cart',
+                uri: 'http://example.com/page/123'
+              }]
+            })
         }
       }
     }
