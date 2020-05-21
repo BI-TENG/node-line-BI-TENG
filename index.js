@@ -14,22 +14,6 @@ const bot = linebot({
   channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN
 })
 
-// 當收到訊息時
-// bot.on('message', function (event) {
-//   if (event.message.type === 'text') {
-//     event.source.profile().then(function (profile) {
-//       event.reply(profile.displayName + '你再說一次試試看')
-//     })
-//   }
-// })
-
-// 當收到訊息時
-// bot.on('message', event => {
-//   if (event.message.type === 'text') {
-//     event.reply(event.message.text)
-//   }
-// })
-
 bot.on('message', async (event) => {
   let msg = []
   try {
@@ -99,6 +83,8 @@ bot.on('message', async (event) => {
                 data: i.Name + '\n' + i.CreditCard + '\n' + i.TravelCard
               }]
             })
+        } else {
+          event.reply('查無資料')
         }
       }
     }
