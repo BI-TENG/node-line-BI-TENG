@@ -52,9 +52,9 @@ bot.on('message', async (event) => {
                 label: '營業時間、聯絡資訊',
                 data: i.Name + '\n' + i.OpenHours + '\n' + i.Tel
               }, {
-                type: 'uri',
-                label: 'Add to cart',
-                uri: 'http://example.com/page/123'
+                type: 'postback',
+                label: '可否用信用卡、國旅卡',
+                data: i.Name + '\n' + i.CreditCard + '\n' + i.TravelCard
               }]
             })
         } else if (i.HostWords.includes(event.message.text)) {
@@ -73,9 +73,30 @@ bot.on('message', async (event) => {
                 label: '營業時間、聯絡資訊',
                 data: i.Name + '\n' + i.OpenHours + '\n' + i.Tel
               }, {
-                type: 'uri',
-                label: 'Add to cart',
-                uri: 'http://example.com/page/123'
+                type: 'postback',
+                label: '可否用信用卡、國旅卡',
+                data: i.Name + '\n' + i.CreditCard + '\n' + i.TravelCard
+              }]
+            })
+        } else if (i.Address.includes(event.message.text)) {
+          msg.push(
+            {
+              thumbnailImageUrl: i.Photo,
+              title: i.Name,
+              text: i.Address,
+              text1: i.OpenHours,
+              actions: [{
+                type: 'postback',
+                label: '地理位置',
+                data: i.Coordinate + ',' + i.Address
+              }, {
+                type: 'postback',
+                label: '營業時間、聯絡資訊',
+                data: i.Name + '\n' + i.OpenHours + '\n' + i.Tel
+              }, {
+                type: 'postback',
+                label: '可否用信用卡、國旅卡',
+                data: i.Name + '\n' + i.CreditCard + '\n' + i.TravelCard
               }]
             })
         }
@@ -103,6 +124,13 @@ bot.on('postback', event => {
     address: event.postback.data.split(',')[2],
     latitude: event.postback.data.split(',')[0],
     longitude: event.postback.data.split(',')[1]
+  })
+})
+
+bot.on('postback', event => {
+  event.reply({
+    type: 'text',
+    text: event.postback.data
   })
 })
 
