@@ -14,12 +14,19 @@ const bot = linebot({
   channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN
 })
 
-// // 當收到訊息時
+// 當收到訊息時
 // bot.on('message', function (event) {
 //   if (event.message.type === 'text') {
 //     event.source.profile().then(function (profile) {
 //       event.reply(profile.displayName + '你再說一次試試看')
 //     })
+//   }
+// })
+
+// 當收到訊息時
+// bot.on('message', event => {
+//   if (event.message.type === 'text') {
+//     event.reply(event.message.text)
 //   }
 // })
 
@@ -35,14 +42,15 @@ bot.on('message', async (event) => {
               thumbnailImageUrl: i.Photo,
               title: i.Name,
               text: i.Address,
+              new: i.OpenHours,
               actions: [{
                 type: 'postback',
                 label: '地理位置',
-                data: i.Coordinate + ',' + i.Address
+                data: i.Coordinate + ',' + i.Address + ',' + i.OpenHours
               }, {
                 type: 'postback',
-                label: 'Add to cart',
-                data: 'action=add&itemid=222'
+                label: '營業時間、聯絡資訊',
+                data: i.Name + '\n' + i.OpenHours + '\n' + i.Tel
               }, {
                 type: 'uri',
                 label: 'Add to cart',
@@ -55,14 +63,15 @@ bot.on('message', async (event) => {
               thumbnailImageUrl: i.Photo,
               title: i.Name,
               text: i.Address,
+              text1: i.OpenHours,
               actions: [{
                 type: 'postback',
                 label: '地理位置',
                 data: i.Coordinate + ',' + i.Address
               }, {
                 type: 'postback',
-                label: 'Add to cart',
-                data: 'action=add&itemid=222'
+                label: '營業時間、聯絡資訊',
+                data: i.Name + '\n' + i.OpenHours + '\n' + i.Tel
               }, {
                 type: 'uri',
                 label: 'Add to cart',
@@ -94,6 +103,13 @@ bot.on('postback', event => {
     address: event.postback.data.split(',')[2],
     latitude: event.postback.data.split(',')[0],
     longitude: event.postback.data.split(',')[1]
+  })
+})
+
+bot.on('postback', event => {
+  event.reply({
+    type: 'text',
+    text: event.postback.data
   })
 })
 // 在 port 啟動
