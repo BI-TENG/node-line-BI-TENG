@@ -124,19 +124,6 @@ bot.on('postback', event => {
   }
 })
 
-// bot.on('postback', event => {
-//   event.reply({
-//     type: 'text',
-//     text: event.postback.data
-//   })
-// })
-
-// bot.on('postback', event => {
-//   event.reply({
-//     type: 'text',
-//     text: event.postback.data
-//   })
-// })
 // 在 port 啟動
 bot.listen('/', process.env.PORT, () => {
   console.log('機器人已啟動')
