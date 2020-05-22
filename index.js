@@ -30,7 +30,7 @@ bot.on('message', async (event) => {
             actions: [{
               type: 'postback',
               label: '地理位置',
-              data: i.Coordinate + ',' + i.Address + ',' + i.OpenHours
+              data: i.Coordinate + ',' + i.Address
             }, {
               type: 'postback',
               label: '營業時間、聯絡資訊',
@@ -106,7 +106,7 @@ bot.on('postback', event => {
   if (data[0].includes('.')) {
     event.reply({
       type: 'location',
-      title: '所在位置',
+      title: '目的位置',
       address: event.postback.data.split(',')[2],
       latitude: event.postback.data.split(',')[0],
       longitude: event.postback.data.split(',')[1]
