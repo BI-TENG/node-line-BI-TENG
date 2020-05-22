@@ -85,7 +85,7 @@ bot.on('message', async (event) => {
           })
       }
     }
-    if (msg.length === 0) { event.reply('查無資料\n請輸入下列相關資訊\n🍀縣市：台北市、基隆、桃園、彰化沒有\n🍀鄉鎮市\n🍀其他關鍵字：露營、螢火蟲、動物...') } else {
+    if (msg.length === 0) { event.reply('查無資料\n請輸入下列相關資訊\n🍀縣市，注：台北市、基隆、桃園、彰化無資料\n🍀鄉鎮市\n🍀其他關鍵字：露營、螢火蟲、動物...') } else {
       event.reply({
         type: 'template',
         altText: 'this is a carousel template',
@@ -114,7 +114,12 @@ bot.on('postback', event => {
   } else if (data[1].includes('True') || data[1].includes('False')) {
     event.reply({
       type: 'text',
-      text: data[0] + '\n' + '信用卡:' + data[1] + '國旅卡:' + data[2]
+      text: data[0] + '\n' + '信用卡:' + data[1] + '\n' + '國旅卡: ' + data[2]
+    })
+  } else {
+    event.reply({
+      type: 'text',
+      text: data[0] + '\n' + '營業時間：' + data[1] + '\n' + '聯絡資訊：' + data[2]
     })
   }
 })
