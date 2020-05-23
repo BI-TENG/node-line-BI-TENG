@@ -85,7 +85,7 @@ bot.on('message', async (event) => {
           })
       }
     }
-    if (msg.length === 0) { event.reply('查無資料\n請輸入下列相關資訊\n🍀縣市，注：台北市、基隆、桃園、彰化無資料\n🍀鄉鎮市，注：有些鄉鎮市無資料\n🍀其他關鍵字：露營、螢火蟲、動物...') } else {
+    if (msg.length === 0) { event.reply('查無資料\n請輸入下列相關資訊\n🍀縣市(台北市、基隆、桃園、彰化無資料)\n🍀鄉鎮市(有些鄉鎮市無資料)\n🍀其他關鍵字：露營、螢火蟲、動物...') } else {
       event.reply({
         type: 'template',
         altText: 'this is a carousel template',
