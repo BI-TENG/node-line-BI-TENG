@@ -5,7 +5,8 @@
 1. 加入方式：
  * line 好友搜尋 ID：@606udjzz
  * 掃描 QR Code
-   ![QR Code](https://i.imgur.com/Qn3lBkz.png) 
+ 
+ ![QR Code](https://i.imgur.com/Qn3lBkz.png) 
 
 2. 輸入訊息：
  * 縣市 - 台北市、基隆、桃園、彰化無資料
